@@ -1,0 +1,30 @@
+<div class="row">
+    <div class="col-12 d-flex justify-content-end">
+        <button type="button" class="btn btn-primary" (click)="exportToPdf()">Export PDF</button>
+    </div>
+    <table class="table col-12 justify-content-center text-center" id="uData">
+        <thead class="text-center">
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">User Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Mobile Number</th>
+                <th scope="col">Address</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let user of userData">
+                <th scope="row">{{user.idUser}}</th>
+                <td>{{user.UserName}}</td>
+                <td>{{user.Email}}</td>
+                <td>{{user.MobileNumber}}</td>
+                <td>{{user.Address}}</td>
+                <td>
+                    <button type="button" class="btn btn-secondary me-2" (click)="update(user)">Update</button>
+                    <button type="button" class="btn btn-danger" (click)="deleteUser(user)">Delete</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

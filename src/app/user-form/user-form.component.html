@@ -1,0 +1,38 @@
+<div class="row d-flex justify-content-center py-4">
+  <form #userDetails="ngForm" (ngSubmit)="saveUser(userDetails.value)" class="col-6">
+    <div class="mb-3">
+      <label for="UserName" class="form-label">User Name</label>
+      <input type="text" class="form-control" placeholder="User Name" [(ngModel)]="userDto.UserName" id="UserName"
+        name="UserName" required>
+    </div>
+    <div class="mb-3">
+      <label for="Password" class="form-label">Password</label>
+      <input type="Password" class="form-control" placeholder="Password" [(ngModel)]="userDto.Password"
+        #Password="ngModel" id="Password" name="Password" required>
+    </div>
+    <div class="mb-3">
+      <label for="Email" class="form-label">Email address</label>
+      <input type="email" class="form-control" placeholder="Email address" [(ngModel)]="userDto.Email" #Email="ngModel"
+        id="Email" name="Email" required>
+    </div>
+    <div class="mb-3">
+      <label for="MobileNumber" class="form-label">Mobile Number</label>
+      <input type="text" class="form-control" placeholder="Mobile Number" [(ngModel)]="userDto.MobileNumber"
+        id="MobileNumber" name="MobileNumber" required>
+    </div>
+    <div class="mb-3">
+      <label for="Address" class="form-label">Address</label>
+      <input type="text" class="form-control" placeholder="Address" [(ngModel)]="userDto.Address" id="Address"
+        name="Address" required>
+    </div>
+    <span *ngIf="disableSubmit" class="me-2">
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </span>
+    <span *ngIf="disableUpdate" class="me-2">
+      <button type="button" class="btn btn-primary" (click)="updateData(userDto)">Update</button>
+    </span>
+    <span>
+      <button type="button" class="btn btn-secondary" (click)="clearForm()">Clear</button>
+    </span>
+  </form>
+</div>
