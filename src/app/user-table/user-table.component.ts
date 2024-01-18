@@ -3,6 +3,7 @@ import { ServiceService } from '../service/service.service';
 import { UserDto } from '../dto/userDto';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-user-table',
@@ -13,9 +14,15 @@ import html2canvas from 'html2canvas';
   providedIn: 'root'
 })
 export class UserTableComponent implements OnInit {
-  userData?: any[];
+  userData?: UserDto[];
+  setUpdateUserTable: Subscription | undefined;
   @ViewChild('htmlData') htmlData!: ElementRef;
   constructor(private service: ServiceService) {
+    this.setUpdateUserTable = this.service.setUpdateUserTable().subscribe((data) => {
+      if (data) {
+        this.getUser();
+      }
+    })
   }
 
   ngOnInit() {
@@ -39,7 +46,7 @@ export class UserTableComponent implements OnInit {
 
   update(user: UserDto) {
     console.log("update", user);
-    this.service.updateForm(user,false,true);
+    this.service.updateForm(user, false, true);
   }
 
   public exportToPdf(): void {

@@ -2,13 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { ServiceService } from '../service/service.service';
 import { UserDto } from '../dto/userDto';
 import { NgForm } from '@angular/forms';
-import { UserTableComponent } from '../user-table/user-table.component';
 
 @Component({
   selector: 'app-user-form',
   templateUrl: './user-form.component.html',
   styleUrls: ['./user-form.component.css']
 })
+
 export class UserFormComponent implements OnInit {
   userDto = new UserDto;
   userDetails!: NgForm;
@@ -16,7 +16,7 @@ export class UserFormComponent implements OnInit {
   disableUpdate: boolean = false;
   userData?: any[];
 
-  constructor(public service: ServiceService, public table:UserTableComponent) {
+  constructor(public service: ServiceService) {
     this.service.updateData.subscribe((data: UserDto) => {
       this.userDto = data;
     })
@@ -35,9 +35,9 @@ export class UserFormComponent implements OnInit {
     console.log(JSON.stringify(userData));
     this.service.saveUser(userData).subscribe((data: any) => {
       console.log("data saved ", data);
-      this.table.getUser()
+      this.clearForm();
+      this.service.updateUserTable()
     })
-    this.clearForm();
   }
 
   clearForm() {

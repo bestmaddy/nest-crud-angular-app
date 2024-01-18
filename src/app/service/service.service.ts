@@ -14,11 +14,12 @@ export class ServiceService {
     })
   }
   userDto = new UserDto;
-  userData?: any[];
+  userData?: UserDto[];
 
   public updateData = new Subject<UserDto>();
-  public disableSubmit= new Subject<boolean>();
-  public disableUpdate= new Subject<boolean>();
+  public disableSubmit = new Subject<boolean>();
+  public disableUpdate = new Subject<boolean>();
+  private getUpdateUserTable = new Subject<any>();
   constructor(private httpClient: HttpClient) {
 
   }
@@ -27,6 +28,14 @@ export class ServiceService {
     this.updateData.next(data);
     this.disableSubmit.next(disableSubmit);
     this.disableUpdate.next(disableUpdate);
+  }
+
+  updateUserTable() {
+    this.getUpdateUserTable.next(1);
+  }
+
+  setUpdateUserTable(): Observable<UserDto> {
+    return this.getUpdateUserTable.asObservable();
   }
 
   getUser() {
